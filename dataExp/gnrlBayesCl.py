@@ -70,6 +70,8 @@ def oracleClassifier(fopt,lossfunc,eta,mu):
     f=''
     for i in range(dom):
         f += str(int(coef*(eta[i]-thres)>=0))
+    print "grad: "
+    print coef*(eta-thres)
     (TP,FP,FN) = binaryMetrics(eta,mu,f)
     print "Binary Metrics"
     print (TP,FP,FN)
@@ -185,12 +187,10 @@ if __name__=='__main__':
     lossfunc = metrics.HMean
     print "Testing "+str(lossfunc.__name__)
     (bestC,bestS)=best_classifier(eta,mu,k,dom,lossfunc)
-    print "optimal classifier"
-    print bestC,bestS
+    print "optimal classifier: "+bestC+" score: "+str(bestS)
 
     (f, score, coef, thres)=oracleClassifier(bestC,lossfunc,eta,mu)
-    print "our classifier"
-    print f,score
+    print "our classifier: "+f+" score: "+str(score)
     if score==bestS:
         print "Success!"
     else:

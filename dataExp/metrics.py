@@ -38,33 +38,33 @@ def Jaccard(x,y,z):
     return (loss,g1,g2,g3)
 
 def GMean(x,y,z):
-    if np.isnan(x*(1-x-y-z)/((x+y)*(1-x-y))) or (x+y)*(x+y-1)==0:
-        return (float('nan'),float('nan'),float('nan'),float('nan'))
-    else:
-        loss = np.sqrt(x*(1-x-y-z)/((x+y)*(1-x-y)))
-        g1num = x*x*(y-z)+(y-1)*y*(2*x+y+z-1)
-        g1den = 2*pow((x+y)*(1-x-y),2)*loss
-        g1 = g1num/g1den
-        g2num = x*z*(1-2*x-2*y)-x*pow(1-x-y,2)
-        g2 = g2num/g1den
-        g3den = 2*(x+y)*(x+y-1)*loss
-        g3 = x/g3den
-        return (loss,g1,g2,g3)
-
-def HMean(x,y,z):
-    loss = 2/((x+y)/x+(1-x-y)/(1-x-y-z))
-    g1num = 2*(x*x*(y-z)+y*(2*x*(y+z-1)+y*y+2*y*(z-1)+z*z-2*z+1))
-    g1den = pow(2*x*x+x*(3*y+z-2)+y*(y+z-1),2)
-    g1=g1num/g1den
-    g2num = 2*x*(x*x+x*(2*y+3*z-2)+y*y+2*y*(z-1)+z*z-2*z+1)
-    g2 = -g2num/g1den
-    g3num = 2*x*x*(x+y-1)
-    g3 = g3num/g1den
+    loss = np.sqrt(x*(1-x-y-z)/((y+z)*(1-y-z)))
+    g1num = 2*x+y+z-1
+    g1den = 2*(y+z-1)*(y+z)*loss
+    g1 = g1num/g1den
+    g2num = x*(x*(2*y+2*z-1)+pow(1-y-z,2))
+    g2den = 2*pow(1-y-z,2)*pow(y+z,2)*loss
+    g2 = -g2num/g2den
+    g3 = g2
     return (loss,g1,g2,g3)
 
+def HMean(x,y,z):
+    if x==0 or 1-x-z==0:
+        return (float('nan'),float('nan'),float('nan'),float('nan'))
+    else:
+        loss = 2/((x+z)/x+(1-x-z)/(1-x-y-z))
+        g1num = 2*(x*x*(z-y)+2*x*z*(y+z-1)+z*pow(1-y-z,2))
+        g1den = pow(2*x*x+x*(y+3*z-2)+z*(y+z-1),2)
+        g1 = g1num/g1den
+        g2num = 2*x*x*(x+z-1)
+        g2 = g2num/g1den
+        g3num = 2*x*(x*x+x*(3*y+2*z-2)+pow(1-y-z,2))
+        g3 = -g3num/g1den
+        return (loss,g1,g2,g3)
+
 def QMean(x,y,z):
-    loss = 1-0.5*(pow(y/(x+y),2)+pow(z/(1-x-y),2))
-    g1 = y*y/pow(x+y,3)+z*z/pow(x+y-1,3)
-    g2 = g1-y/pow(x+y,2)
-    g3 = -z/pow(1-x-y,2)
+    loss = 1-0.5*(pow(z/(x+z),2)+pow(y/(1-x-z),2))
+    g1 = y*y/pow(x+z-1,3)+z*z/pow(x+z,3)
+    g2 = -y/pow(x+z-1,2)
+    g3 = y*y/pow(x+z-1,3)-x*z/pow(x+z,3)
     return (loss,g1,g2,g3)

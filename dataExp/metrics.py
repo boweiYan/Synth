@@ -38,14 +38,15 @@ def Jaccard(x,y,z):
     return (loss,g1,g2,g3)
 
 def GMean(x,y,z):
-    loss = np.sqrt(x*(1-x-y-z)/((y+z)*(1-y-z)))
-    g1num = 2*x+y+z-1
-    g1den = 2*(y+z-1)*(y+z)*loss
-    g1 = g1num/g1den
-    g2num = x*(x*(2*y+2*z-1)+pow(1-y-z,2))
-    g2den = 2*pow(1-y-z,2)*pow(y+z,2)*loss
-    g2 = -g2num/g2den
-    g3 = g2
+    loss = np.sqrt(x*(1-x-y-z)/((x+z)*(1-x-z)))
+    g1num = x*x*(y-z)+(z-1)*z*(1-2*x-y-z)
+    g1den = 2*pow(x+z-1,2)*pow(x+z,2)*loss
+    g1 = -g1num/g1den
+    g2num = x
+    g2den = 2*(x+z-1)*(x+z)*loss
+    g2 = g2num/g2den
+    g3num = x*(x*x+2*x*(y+z-1)+y*(2*z-1)+pow(z-1,2))
+    g3 = -g3num/g1den
     return (loss,g1,g2,g3)
 
 def HMean(x,y,z):
@@ -67,4 +68,11 @@ def QMean(x,y,z):
     g1 = y*y/pow(x+z-1,3)+z*z/pow(x+z,3)
     g2 = -y/pow(x+z-1,2)
     g3 = y*y/pow(x+z-1,3)-x*z/pow(x+z,3)
+    return (loss,g1,g2,g3)
+
+def TPR(x,y,z):
+    loss=x/(x+z)
+    g1 = x/pow(x+z,2)
+    g2 = 0
+    g3 = -x/(x+z)/(x+z)
     return (loss,g1,g2,g3)

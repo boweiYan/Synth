@@ -2,8 +2,9 @@
 <project version="4">
   <component name="ChangeListManager">
     <list default="true" id="1142a33c-4d02-4652-94bd-6f480f1e8ecd" name="Default" comment="">
+      <change type="NEW" beforePath="" afterPath="$PROJECT_DIR$/dataExp/optHMean.py" />
       <change type="MODIFICATION" beforePath="$PROJECT_DIR$/dataExp/gnrlBayesCl.py" afterPath="$PROJECT_DIR$/dataExp/gnrlBayesCl.py" />
-      <change type="MODIFICATION" beforePath="$PROJECT_DIR$/dataExp/metrics.py" afterPath="$PROJECT_DIR$/dataExp/metrics.py" />
+      <change type="MODIFICATION" beforePath="$PROJECT_DIR$/.idea/workspace.xml" afterPath="$PROJECT_DIR$/.idea/workspace.xml" />
     </list>
     <ignored path="Synth.iws" />
     <ignored path=".idea/workspace.xml" />
@@ -30,14 +31,12 @@
       <file leaf-file-name="gnrlBayesCl.py" pinned="false" current-in-tab="false">
         <entry file="file://$PROJECT_DIR$/dataExp/gnrlBayesCl.py">
           <provider selected="true" editor-type-id="text-editor">
-            <state vertical-scroll-proportion="0.0" vertical-offset="1546" max-vertical-offset="2040">
-              <caret line="186" column="28" selection-start-line="186" selection-start-column="28" selection-end-line="186" selection-end-column="28" />
+            <state vertical-scroll-proportion="0.0" vertical-offset="850" max-vertical-offset="2346">
+              <caret line="66" column="20" selection-start-line="60" selection-start-column="4" selection-end-line="67" selection-end-column="53" />
               <folding>
                 <element signature="e#132#143#0" expanded="true" />
                 <element signature="e#766#857#0" expanded="false" />
-                <element signature="e#896#1029#0" expanded="false" />
                 <element signature="e#1071#1247#0" expanded="false" />
-                <element signature="e#1957#2340#0" expanded="false" />
                 <element signature="e#2571#2690#0" expanded="false" />
                 <element signature="e#2716#3304#0" expanded="false" />
                 <element signature="e#3355#4614#0" expanded="false" />
@@ -46,16 +45,27 @@
           </provider>
         </entry>
       </file>
-      <file leaf-file-name="metrics.py" pinned="false" current-in-tab="true">
+      <file leaf-file-name="metrics.py" pinned="false" current-in-tab="false">
         <entry file="file://$PROJECT_DIR$/dataExp/metrics.py">
           <provider selected="true" editor-type-id="text-editor">
-            <state vertical-scroll-proportion="0.70034844" vertical-offset="598" max-vertical-offset="1037">
-              <caret line="47" column="52" selection-start-line="47" selection-start-column="52" selection-end-line="47" selection-end-column="52" />
+            <state vertical-scroll-proportion="0.0" vertical-offset="765" max-vertical-offset="1241">
+              <caret line="51" column="0" selection-start-line="51" selection-start-column="0" selection-end-line="63" selection-end-column="30" />
               <folding>
                 <element signature="e#120#131#0" expanded="true" />
-                <element signature="e#1125#1569#0" expanded="false" />
                 <element signature="e#1593#1773#0" expanded="false" />
                 <element signature="e#1795#1891#0" expanded="false" />
+              </folding>
+            </state>
+          </provider>
+        </entry>
+      </file>
+      <file leaf-file-name="optHMean.py" pinned="false" current-in-tab="true">
+        <entry file="file://$PROJECT_DIR$/dataExp/optHMean.py">
+          <provider selected="true" editor-type-id="text-editor">
+            <state vertical-scroll-proportion="1.7372262" vertical-offset="0" max-vertical-offset="646">
+              <caret line="28" column="80" selection-start-line="28" selection-start-column="80" selection-end-line="28" selection-end-column="80" />
+              <folding>
+                <element signature="e#0#11#0" expanded="true" />
               </folding>
             </state>
           </provider>
@@ -73,8 +83,9 @@
         <option value="$PROJECT_DIR$/testCounterExample.py" />
         <option value="$PROJECT_DIR$/metrics.py" />
         <option value="$PROJECT_DIR$/gnrlBayesCl.py" />
-        <option value="$PROJECT_DIR$/dataExp/gnrlBayesCl.py" />
         <option value="$PROJECT_DIR$/dataExp/metrics.py" />
+        <option value="$PROJECT_DIR$/dataExp/gnrlBayesCl.py" />
+        <option value="$PROJECT_DIR$/dataExp/optHMean.py" />
       </list>
     </option>
   </component>
@@ -91,7 +102,7 @@
     <OptionsSetting value="true" id="Update" />
     <OptionsSetting value="true" id="Status" />
     <OptionsSetting value="true" id="Edit" />
-    <ConfirmationsSetting value="0" id="Add" />
+    <ConfirmationsSetting value="2" id="Add" />
     <ConfirmationsSetting value="0" id="Remove" />
   </component>
   <component name="ProjectView">
@@ -107,7 +118,6 @@
       <sortByType />
     </navigator>
     <panes>
-      <pane id="Scope" />
       <pane id="ProjectPane">
         <subPane>
           <PATH>
@@ -142,11 +152,12 @@
           </PATH>
         </subPane>
       </pane>
+      <pane id="Scope" />
     </panes>
   </component>
   <component name="PropertiesComponent">
     <property name="recentsLimit" value="5" />
-    <property name="last_opened_file_path" value="C:/Git/bin/git.exe" />
+    <property name="last_opened_file_path" value="$PROJECT_DIR$" />
     <property name="FullScreen" value="false" />
     <property name="options.lastSelected" value="vcs.Git" />
     <property name="options.splitter.main.proportions" value="0.3" />
@@ -162,7 +173,7 @@
       <recent name="D:\Research\Pradeep\Synth\dataExp" />
     </key>
   </component>
-  <component name="RunManager" selected="Python.gnrlBayesCl (1)">
+  <component name="RunManager" selected="Python.optHMean">
     <configuration default="false" name="gnrlBayesCl" type="PythonConfigurationType" factoryName="Python" temporary="true">
       <option name="INTERPRETER_OPTIONS" value="" />
       <option name="PARENT_ENVS" value="true" />
@@ -233,6 +244,25 @@
       <option name="ADD_SOURCE_ROOTS" value="true" />
       <module name="Synth" />
       <option name="SCRIPT_NAME" value="$PROJECT_DIR$/dataExp/metrics.py" />
+      <option name="PARAMETERS" value="" />
+      <option name="SHOW_COMMAND_LINE" value="false" />
+      <RunnerSettings RunnerId="PythonRunner" />
+      <ConfigurationWrapper RunnerId="PythonRunner" />
+      <method />
+    </configuration>
+    <configuration default="false" name="optHMean" type="PythonConfigurationType" factoryName="Python" temporary="true">
+      <option name="INTERPRETER_OPTIONS" value="" />
+      <option name="PARENT_ENVS" value="true" />
+      <envs>
+        <env name="PYTHONUNBUFFERED" value="1" />
+      </envs>
+      <option name="SDK_HOME" value="" />
+      <option name="WORKING_DIRECTORY" value="$PROJECT_DIR$/dataExp" />
+      <option name="IS_MODULE_SDK" value="true" />
+      <option name="ADD_CONTENT_ROOTS" value="true" />
+      <option name="ADD_SOURCE_ROOTS" value="true" />
+      <module name="Synth" />
+      <option name="SCRIPT_NAME" value="$PROJECT_DIR$/dataExp/optHMean.py" />
       <option name="PARAMETERS" value="" />
       <option name="SHOW_COMMAND_LINE" value="false" />
       <RunnerSettings RunnerId="PythonRunner" />
@@ -361,18 +391,20 @@
       <option name="USE_PARAM" value="false" />
       <method />
     </configuration>
-    <list size="4">
+    <list size="5">
       <item index="0" class="java.lang.String" itemvalue="Python.gnrlBayesCl" />
       <item index="1" class="java.lang.String" itemvalue="Python.testCounterExample" />
       <item index="2" class="java.lang.String" itemvalue="Python.gnrlBayesCl (1)" />
       <item index="3" class="java.lang.String" itemvalue="Python.metrics" />
+      <item index="4" class="java.lang.String" itemvalue="Python.optHMean" />
     </list>
     <recent_temporary>
-      <list size="4">
-        <item index="0" class="java.lang.String" itemvalue="Python.gnrlBayesCl (1)" />
-        <item index="1" class="java.lang.String" itemvalue="Python.metrics" />
-        <item index="2" class="java.lang.String" itemvalue="Python.gnrlBayesCl" />
-        <item index="3" class="java.lang.String" itemvalue="Python.testCounterExample" />
+      <list size="5">
+        <item index="0" class="java.lang.String" itemvalue="Python.optHMean" />
+        <item index="1" class="java.lang.String" itemvalue="Python.gnrlBayesCl (1)" />
+        <item index="2" class="java.lang.String" itemvalue="Python.metrics" />
+        <item index="3" class="java.lang.String" itemvalue="Python.gnrlBayesCl" />
+        <item index="4" class="java.lang.String" itemvalue="Python.testCounterExample" />
       </list>
     </recent_temporary>
   </component>
@@ -391,7 +423,7 @@
   </component>
   <component name="ToolWindowManager">
     <frame x="-8" y="-8" width="1382" height="744" extended-state="6" />
-    <editor active="true" />
+    <editor active="false" />
     <layout>
       <window_info id="Changes" active="false" anchor="bottom" auto_hide="false" internal_type="DOCKED" type="DOCKED" visible="false" weight="0.33" sideWeight="0.5" order="5" side_tool="false" content_ui="tabs" />
       <window_info id="Project" active="false" anchor="left" auto_hide="false" internal_type="DOCKED" type="DOCKED" visible="true" weight="0.18448023" sideWeight="0.5" order="1" side_tool="false" content_ui="combo" />
@@ -400,7 +432,7 @@
       <window_info id="Application Servers" active="false" anchor="bottom" auto_hide="false" internal_type="DOCKED" type="DOCKED" visible="false" weight="0.33" sideWeight="0.5" order="1" side_tool="false" content_ui="tabs" />
       <window_info id="Python Console" active="false" anchor="bottom" auto_hide="false" internal_type="DOCKED" type="DOCKED" visible="false" weight="0.33" sideWeight="0.5" order="2" side_tool="false" content_ui="tabs" />
       <window_info id="Version Control" active="false" anchor="bottom" auto_hide="false" internal_type="DOCKED" type="DOCKED" visible="false" weight="0.33" sideWeight="0.5" order="3" side_tool="false" content_ui="tabs" />
-      <window_info id="Run" active="false" anchor="bottom" auto_hide="false" internal_type="DOCKED" type="DOCKED" visible="true" weight="0.5031447" sideWeight="0.5" order="8" side_tool="false" content_ui="tabs" />
+      <window_info id="Run" active="true" anchor="bottom" auto_hide="false" internal_type="DOCKED" type="DOCKED" visible="true" weight="0.5031447" sideWeight="0.5" order="8" side_tool="false" content_ui="tabs" />
       <window_info id="Structure" active="false" anchor="left" auto_hide="false" internal_type="DOCKED" type="DOCKED" visible="false" weight="0.25" sideWeight="0.5" order="2" side_tool="false" content_ui="tabs" />
       <window_info id="Terminal" active="false" anchor="bottom" auto_hide="false" internal_type="DOCKED" type="DOCKED" visible="false" weight="0.33" sideWeight="0.5" order="4" side_tool="false" content_ui="tabs" />
       <window_info id="Favorites" active="false" anchor="left" auto_hide="false" internal_type="DOCKED" type="DOCKED" visible="false" weight="0.33" sideWeight="0.5" order="0" side_tool="true" content_ui="tabs" />
@@ -437,13 +469,37 @@
     <watches-manager />
   </component>
   <component name="editorHistoryManager">
+    <entry file="file://$PROJECT_DIR$/dataExp/gnrlBayesCl.py">
+      <provider selected="true" editor-type-id="text-editor">
+        <state vertical-scroll-proportion="0.0" vertical-offset="1546" max-vertical-offset="2040">
+          <caret line="186" column="28" selection-start-line="186" selection-start-column="28" selection-end-line="186" selection-end-column="28" />
+          <folding>
+            <element signature="e#132#143#0" expanded="true" />
+            <element signature="e#766#857#0" expanded="false" />
+            <element signature="e#1071#1247#0" expanded="false" />
+            <element signature="e#2571#2690#0" expanded="false" />
+            <element signature="e#2716#3304#0" expanded="false" />
+            <element signature="e#3355#4614#0" expanded="false" />
+          </folding>
+        </state>
+      </provider>
+    </entry>
+    <entry file="file://$PROJECT_DIR$/dataExp/metrics.py">
+      <provider selected="true" editor-type-id="text-editor">
+        <state vertical-scroll-proportion="0.0" vertical-offset="0" max-vertical-offset="1037">
+          <caret line="0" column="0" selection-start-line="0" selection-start-column="0" selection-end-line="0" selection-end-column="0" />
+          <folding>
+            <element signature="e#120#131#0" expanded="true" />
+            <element signature="e#1593#1773#0" expanded="false" />
+            <element signature="e#1795#1891#0" expanded="false" />
+          </folding>
+        </state>
+      </provider>
+    </entry>
     <entry file="file://$PROJECT_DIR$/bayesopt_ratios.py">
       <provider selected="true" editor-type-id="text-editor">
         <state vertical-scroll-proportion="0.0" vertical-offset="1361" max-vertical-offset="4250">
           <caret line="98" column="37" selection-start-line="98" selection-start-column="27" selection-end-line="98" selection-end-column="37" />
-          <folding>
-            <element signature="e#194#212#0" expanded="false" />
-          </folding>
         </state>
       </provider>
     </entry>
@@ -454,9 +510,7 @@
           <folding>
             <element signature="e#132#143#0" expanded="true" />
             <element signature="e#766#857#0" expanded="false" />
-            <element signature="e#896#1029#0" expanded="false" />
             <element signature="e#1071#1247#0" expanded="false" />
-            <element signature="e#1957#2340#0" expanded="false" />
             <element signature="e#2571#2690#0" expanded="false" />
             <element signature="e#2716#3304#0" expanded="false" />
             <element signature="e#3355#4614#0" expanded="false" />
@@ -470,7 +524,6 @@
           <caret line="10" column="0" selection-start-line="10" selection-start-column="0" selection-end-line="10" selection-end-column="0" />
           <folding>
             <element signature="e#120#131#0" expanded="true" />
-            <element signature="e#1125#1569#0" expanded="false" />
             <element signature="e#1593#1773#0" expanded="false" />
             <element signature="e#1795#1891#0" expanded="false" />
           </folding>
@@ -481,9 +534,6 @@
       <provider selected="true" editor-type-id="text-editor">
         <state vertical-scroll-proportion="0.0" vertical-offset="3893" max-vertical-offset="4386">
           <caret line="236" column="4" selection-start-line="230" selection-start-column="4" selection-end-line="236" selection-end-column="4" />
-          <folding>
-            <element signature="e#132#143#0" expanded="false" />
-          </folding>
         </state>
       </provider>
     </entry>
@@ -491,9 +541,6 @@
       <provider selected="true" editor-type-id="text-editor">
         <state vertical-scroll-proportion="0.0" vertical-offset="1361" max-vertical-offset="4250">
           <caret line="98" column="37" selection-start-line="98" selection-start-column="27" selection-end-line="98" selection-end-column="37" />
-          <folding>
-            <element signature="e#194#212#0" expanded="false" />
-          </folding>
         </state>
       </provider>
     </entry>
@@ -504,9 +551,7 @@
           <folding>
             <element signature="e#132#143#0" expanded="true" />
             <element signature="e#766#857#0" expanded="false" />
-            <element signature="e#896#1029#0" expanded="false" />
             <element signature="e#1071#1247#0" expanded="false" />
-            <element signature="e#1957#2340#0" expanded="false" />
             <element signature="e#2571#2690#0" expanded="false" />
             <element signature="e#2716#3304#0" expanded="false" />
             <element signature="e#3355#4614#0" expanded="false" />
@@ -518,9 +563,6 @@
       <provider selected="true" editor-type-id="text-editor">
         <state vertical-scroll-proportion="0.0" vertical-offset="3893" max-vertical-offset="4386">
           <caret line="236" column="4" selection-start-line="230" selection-start-column="4" selection-end-line="236" selection-end-column="4" />
-          <folding>
-            <element signature="e#132#143#0" expanded="false" />
-          </folding>
         </state>
       </provider>
     </entry>
@@ -528,9 +570,6 @@
       <provider selected="true" editor-type-id="text-editor">
         <state vertical-scroll-proportion="0.0" vertical-offset="2329" max-vertical-offset="4250">
           <caret line="141" column="23" selection-start-line="141" selection-start-column="23" selection-end-line="141" selection-end-column="23" />
-          <folding>
-            <element signature="e#194#212#0" expanded="false" />
-          </folding>
         </state>
       </provider>
     </entry>
@@ -541,9 +580,7 @@
           <folding>
             <element signature="e#132#143#0" expanded="true" />
             <element signature="e#766#857#0" expanded="false" />
-            <element signature="e#896#1029#0" expanded="false" />
             <element signature="e#1071#1247#0" expanded="false" />
-            <element signature="e#1957#2340#0" expanded="false" />
             <element signature="e#2571#2690#0" expanded="false" />
             <element signature="e#2716#3304#0" expanded="false" />
             <element signature="e#3355#4614#0" expanded="false" />
@@ -555,9 +592,6 @@
       <provider selected="true" editor-type-id="text-editor">
         <state vertical-scroll-proportion="0.0" vertical-offset="2245" max-vertical-offset="2771">
           <caret line="144" column="30" selection-start-line="144" selection-start-column="30" selection-end-line="144" selection-end-column="30" />
-          <folding>
-            <element signature="e#132#143#0" expanded="false" />
-          </folding>
         </state>
       </provider>
     </entry>
@@ -565,9 +599,6 @@
       <provider selected="true" editor-type-id="text-editor">
         <state vertical-scroll-proportion="0.0" vertical-offset="1361" max-vertical-offset="4250">
           <caret line="98" column="37" selection-start-line="98" selection-start-column="27" selection-end-line="98" selection-end-column="37" />
-          <folding>
-            <element signature="e#194#212#0" expanded="false" />
-          </folding>
         </state>
       </provider>
     </entry>
@@ -575,22 +606,29 @@
       <provider selected="true" editor-type-id="text-editor">
         <state vertical-scroll-proportion="0.37037036" vertical-offset="3792" max-vertical-offset="4386">
           <caret line="236" column="4" selection-start-line="230" selection-start-column="4" selection-end-line="236" selection-end-column="4" />
+        </state>
+      </provider>
+    </entry>
+    <entry file="file://$PROJECT_DIR$/dataExp/metrics.py">
+      <provider selected="true" editor-type-id="text-editor">
+        <state vertical-scroll-proportion="0.0" vertical-offset="765" max-vertical-offset="1241">
+          <caret line="51" column="0" selection-start-line="51" selection-start-column="0" selection-end-line="63" selection-end-column="30" />
           <folding>
-            <element signature="e#132#143#0" expanded="false" />
+            <element signature="e#120#131#0" expanded="true" />
+            <element signature="e#1593#1773#0" expanded="false" />
+            <element signature="e#1795#1891#0" expanded="false" />
           </folding>
         </state>
       </provider>
     </entry>
     <entry file="file://$PROJECT_DIR$/dataExp/gnrlBayesCl.py">
       <provider selected="true" editor-type-id="text-editor">
-        <state vertical-scroll-proportion="0.0" vertical-offset="1546" max-vertical-offset="2040">
-          <caret line="186" column="28" selection-start-line="186" selection-start-column="28" selection-end-line="186" selection-end-column="28" />
+        <state vertical-scroll-proportion="0.0" vertical-offset="850" max-vertical-offset="2346">
+          <caret line="66" column="20" selection-start-line="60" selection-start-column="4" selection-end-line="67" selection-end-column="53" />
           <folding>
             <element signature="e#132#143#0" expanded="true" />
             <element signature="e#766#857#0" expanded="false" />
-            <element signature="e#896#1029#0" expanded="false" />
             <element signature="e#1071#1247#0" expanded="false" />
-            <element signature="e#1957#2340#0" expanded="false" />
             <element signature="e#2571#2690#0" expanded="false" />
             <element signature="e#2716#3304#0" expanded="false" />
             <element signature="e#3355#4614#0" expanded="false" />
@@ -598,15 +636,12 @@
         </state>
       </provider>
     </entry>
-    <entry file="file://$PROJECT_DIR$/dataExp/metrics.py">
+    <entry file="file://$PROJECT_DIR$/dataExp/optHMean.py">
       <provider selected="true" editor-type-id="text-editor">
-        <state vertical-scroll-proportion="0.70034844" vertical-offset="598" max-vertical-offset="1037">
-          <caret line="47" column="52" selection-start-line="47" selection-start-column="52" selection-end-line="47" selection-end-column="52" />
+        <state vertical-scroll-proportion="1.7372262" vertical-offset="0" max-vertical-offset="646">
+          <caret line="28" column="80" selection-start-line="28" selection-start-column="80" selection-end-line="28" selection-end-column="80" />
           <folding>
-            <element signature="e#120#131#0" expanded="true" />
-            <element signature="e#1125#1569#0" expanded="false" />
-            <element signature="e#1593#1773#0" expanded="false" />
-            <element signature="e#1795#1891#0" expanded="false" />
+            <element signature="e#0#11#0" expanded="true" />
           </folding>
         </state>
       </provider>

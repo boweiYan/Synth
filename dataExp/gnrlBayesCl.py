@@ -59,22 +59,17 @@ def binaryMetrics_emp(ypred,ytrue):
 def oracleClassifier(fopt,lossfunc,eta,mu):
     dom = eta.shape[0]
     (TP,FP,FN) = binaryMetrics(eta,mu,fopt)
-    print "Optimal Binary Metrics"
-    print (TP,FP,FN,1-TP-FP-FN)
 
     (loss,g1,g2,g3)=lossfunc(TP,FP,FN)
     coef = g1-g2-g3
     thres = -g2/coef
-    print "g1 "+str(g1)+" g2 "+str(g2)+" g3 "+str(g3)
     print "Our classifier= "+str(coef)+"*sgn(eta(x)-"+str(thres)+")"
     f=''
     for i in range(dom):
         f += str(int(coef*(eta[i]-thres)>=0))
-    print "grad: "
-    print coef*(eta-thres)
     (TP,FP,FN) = binaryMetrics(eta,mu,f)
-    print "Binary Metrics"
-    print (TP,FP,FN)
+    #print "Binary Metrics"
+    #print (TP,FP,FN)
     score=lossfunc(TP,FP,FN)[0]
     return f,score,coef,thres
 

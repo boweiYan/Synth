@@ -42,8 +42,7 @@ def binary2nparray(fstr):
         f[i]=int(fstr[i])
     return f
 
-def binaryMetrics(eta,mu,f_str):
-    f=binary2nparray(f_str)
+def binaryMetrics(eta,mu,f):
     TP = np.dot(eta*f, mu)
     FP = np.dot((1-eta)*f, mu)
     FN = np.dot(eta*(1-f),mu)
@@ -58,6 +57,7 @@ def binaryMetrics_emp(ypred,ytrue):
 
 def oracleClassifier(fopt,lossfunc,eta,mu):
     dom = eta.shape[0]
+    fopt = binary2nparray(fopt)
     (TP,FP,FN) = binaryMetrics(eta,mu,fopt)
 
     (loss,g1,g2,g3)=lossfunc(TP,FP,FN)
@@ -67,7 +67,8 @@ def oracleClassifier(fopt,lossfunc,eta,mu):
     f=''
     for i in range(dom):
         f += str(int(coef*(eta[i]-thres)>=0))
-    (TP,FP,FN) = binaryMetrics(eta,mu,f)
+    f_arr = binary2nparray(f)
+    (TP,FP,FN) = binaryMetrics(eta,mu,f_arr)
     #print "Binary Metrics"
     #print (TP,FP,FN)
     score=lossfunc(TP,FP,FN)[0]
@@ -80,8 +81,12 @@ def best_classifier(eta,mu,k,dom,lossfunc):
     # convert K length binary variable to binary
     for i in range(int(math.pow(k,dom))):
         curC = np.binary_repr(i,dom)
-        (TP,FP,FN)=binaryMetrics(eta,mu,curC)
+        curC_arr = binary2nparray(curC)
+        (TP,FP,FN)=binaryMetrics(eta,mu,curC_arr)
+        print (TP,FP,FN)
         curS=lossfunc(TP,FP,FN)[0]
+        print 'current classifier: '+curC + ' current score: '+str(curS)+'\n'
+
         if ~np.isnan(curS) and curS > bestS:
             bestC = curC
             bestS = curS
@@ -136,7 +141,6 @@ def subplotter(cbest_str, eta, coef, delta):
     f = plt.figure()
     ax = f.add_subplot(111)
     ax.step(index, eta[order], 'k-',  linewidth=3.0, markersize=8.0)
-    # TODO, use lolipop plot!
     ax.plot([index[0], index[-1]], [delta, delta], marker='o', linewidth=3.0, markersize=8.0)
     if coef>0:
         ax.step(index, cbest[order], marker='s', linewidth=3.0, markersize=8.0) #, where='mid'

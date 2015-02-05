@@ -14,26 +14,29 @@ def array2str(nparray):
         str1 += ' '+str(nparray[i])
     return str1
 
+def Hmean_ex(TP,TN):
+    # Define HMean as a function to TP and TN, restricted P(true)=0.5
+    return 4*TP*TN/(TP+TN)
 
 if __name__=='__main__':
     eta = np.array([0.49,0.5,0.51])
-    eps = np.array([0.3,0.4,0.3])
-    for i in range(20,40):
-        eps  = 0.5/100 * i
-        mu = np.array([0.5-eps,2*eps,0.5-eps])
-        (bestC,bestS)=gnrlBayesCl.best_classifier(eta,mu,2,3,metrics.HMean)
-        py1 = np.dot(eta,mu)
-
-        print "mu="+array2str(mu)+" optimal classifier: "+bestC+" p(true)="+str(py1)
-        (TP,FP,FN) = gnrlBayesCl.binaryMetrics(eta,mu,bestC)
-        (loss,g1,g2,g3)=metrics.HMean(TP,FP,FN)
-        print "Opt Gradient: "+array2str((g1-g2-g3)*eta+g2)
-
-        print "Optimal Binary Metrics"+array2str(np.array([TP,FP,FN,1-TP-FP-FN]))
-        curC,score,coef,thres=gnrlBayesCl.oracleClassifier(bestC,metrics.HMean,eta,mu)
-        (TP,FP,FN) = gnrlBayesCl.binaryMetrics(eta,mu,curC)
-        print 'Current classifier '+curC+" Current Binary Metrics"+array2str(np.array([TP,FP,FN,1-TP-FP-FN]))
-
-        (loss,g1,g2,g3)=metrics.HMean(TP,FP,FN)
-        print "Cur Gradient: "+array2str((g1-g2-g3)*eta+g2)
-        print '\n'
+    mu = np.array([0.3,0.4,0.3])
+    best = -1
+    bestTP = -1
+    bestTN = -1
+    f = np.zeros(3)
+    #(bestC,bestS)=gnrlBayesCl.best_classifier(eta,mu,2,3,metrics.HMean)
+    # Test all randomized classifiers
+    N=100
+    for i in range(N+1):
+        for j in range(N+1):
+            for k in range(N+1):
+                f=np.array([i,j,k])*1./N
+                (TP,FP,FN) = gnrlBayesCl.binaryMetrics(eta,mu,f)
+                score = Hmean_ex(TP,1-TP-FP-FN)
+                if score > best:
+                    best = score
+                    bestC = f
+                    bestTP = TP
+                    bestTN = 1-TP-FP-FN
+    print best, bestC, bestTP, bestTN

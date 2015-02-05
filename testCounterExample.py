@@ -197,7 +197,6 @@ def subplotter(cbest_str, eta, coef, delta):
     f = plt.figure()
     ax = f.add_subplot(111)
     ax.step(index, eta[order], 'k-',  linewidth=3.0, markersize=8.0)
-    # TODO, use lolipop plot!
     ax.plot([index[0], index[-1]], [delta, delta], marker='o', linewidth=3.0, markersize=8.0)
     if coef>0:
         ax.step(index, cbest[order], marker='s', linewidth=3.0, markersize=8.0) #, where='mid'

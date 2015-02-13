@@ -4,7 +4,6 @@ from matplotlib import cm
 import numpy as np
 fig = plt.figure()
 ax = fig.gca(projection='3d')
-
 X=np.arange(0,1,0.01)
 Y=X.copy()
 xx,yy = np.meshgrid(X,Y)

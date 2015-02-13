@@ -27,16 +27,30 @@ if __name__=='__main__':
     f = np.zeros(3)
     #(bestC,bestS)=gnrlBayesCl.best_classifier(eta,mu,2,3,metrics.HMean)
     # Test all randomized classifiers
-    N=100
+    N=1
     for i in range(N+1):
         for j in range(N+1):
             for k in range(N+1):
                 f=np.array([i,j,k])*1./N
                 (TP,FP,FN) = gnrlBayesCl.binaryMetrics(eta,mu,f)
-                score = Hmean_ex(TP,1-TP-FP-FN)
-                if score > best:
-                    best = score
-                    bestC = f
-                    bestTP = TP
-                    bestTN = 1-TP-FP-FN
-    print best, bestC, bestTP, bestTN
+                print i,j,k
+                print TP,FP,FN,1-TP-FP-FN
+                (loss,g1,g2,g3)=metrics.HMean(TP,FP,FN)
+                print g1,g2,g3,loss
+                print ((g1-g2-g3)*eta+g2)*mu
+                print '\n'
+
+    # Now let's check the optimal condition
+    best1 = np.array([0,1,0])
+    best2 = np.array([1,0,1])
+    for i in range(N+1):
+        for j in range(N+1):
+            for k in range(N+1):
+                f = np.array([i,j,k])*1./N
+                (TP,FP,FN) = gnrlBayesCl.binaryMetrics(eta,mu,f)
+                print i,j,k
+                (loss,g1,g2,g3)=metrics.HMean(TP,FP,FN)
+                gradient = ((g1-g2-g3)*eta+g2)*mu
+                print np.dot(gradient,best1-f)
+                print np.dot(gradient,best2-f)
+                print '\n'

@@ -4,10 +4,10 @@ from matplotlib import cm
 import numpy as np
 fig = plt.figure()
 ax = fig.gca(projection='3d')
-X=np.arange(0,1,0.01)
+X=np.arange(-2,2,0.01)
 Y=X.copy()
 xx,yy = np.meshgrid(X,Y)
-Z=4*xx*yy/(xx+yy)
+Z=.5*(xx-2)*(xx-2)+.5*(yy-.5)*(yy-.5)
 
 print Z
 ax.surf = ax.plot_surface(xx, yy, Z, rstride=1, cstride=1)

@@ -43,9 +43,9 @@ def binary2nparray(fstr):
     return f
 
 def binaryMetrics(eta,mu,f):
-    TP = np.dot(eta*f, mu)
-    FP = np.dot((1-eta)*f, mu)
-    FN = np.dot(eta*(1-f),mu)
+    TP = np.dot(eta*(f+1)/2., mu)
+    FP = np.dot((1-eta)*(f+1)/2., mu)
+    FN = np.dot(eta*(1-f)/2.,mu)
     return (TP,FP,FN)
 
 def binaryMetrics_emp(ypred,ytrue):
@@ -74,24 +74,28 @@ def oracleClassifier(fopt,lossfunc,eta,mu):
     score=lossfunc(TP,FP,FN)[0]
     return f,score,coef,thres
 
-def best_classifier(eta,mu,k,dom,lossfunc):
-    bestC = np.zeros(dom)
-    curC = bestC
-    bestS = -1
-    # convert K length binary variable to binary
-    for i in range(int(math.pow(k,dom))):
-        curC = np.binary_repr(i,dom)
-        curC_arr = binary2nparray(curC)
-        (TP,FP,FN)=binaryMetrics(eta,mu,curC_arr)
-        print (TP,FP,FN)
-        curS=lossfunc(TP,FP,FN)[0]
-        print 'current classifier: '+curC + ' current score: '+str(curS)+'\n'
-
-        if ~np.isnan(curS) and curS > bestS:
-            bestC = curC
-            bestS = curS
-
-    return (bestC,bestS)
+def bestfF(eta, mu, lossfunc, method):
+    if method == 'F':
+        N = 100
+    elif method == 'T':
+        N = 1
+    fFC = np.zeros(3)
+    fFS = -1
+    for i in range(N+1):
+        for j in range(N+1):
+            for k in range(N+1):
+                f = np.array([i,j,k])*1./N
+                f = 2*f -1
+                (TP,FP,FN) = binaryMetrics(eta,mu,f)
+                (loss,g1,g2,g3) = lossfunc(TP,FP,FN)
+                grad = ((g1-g2-g3)*eta+g2)*mu/2
+                c1 = (g1-g2-g3)/2
+                c2 = -g2/(g1-g2-g3)
+                if loss > fFS:
+                    fFC = f
+                    fFS = loss
+                    c = (c1,c2,grad)
+    return (fFC, fFS, c)
 
 
 ##########################################

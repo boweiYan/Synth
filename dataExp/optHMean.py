@@ -14,6 +14,16 @@ def array2str(nparray):
         str1 += ' '+str(nparray[i])
     return str1
 
+def HMean3D(f, eta, mu):
+    # Here x, y, z are the classifiers in 3-d case, f(x1), f(x2), f(x3) respectively
+    TP = np.sum((1+f)*eta*mu/2)
+    FN = np.sum((1-f)*eta*mu/2)
+    TN = np.sum((1-f)*(1-eta)*mu/2)
+    FP = np.sum((1+f)*(1-eta)*mu/2)
+    TPR = TP/(TP+FN)
+    TNR = TN/(TN+FP)
+    return -2*TPR*TNR/(TPR+TNR)
+
 def Hmean_partial_der(f):
     x = f[0]
     y = f[1]

@@ -13,6 +13,8 @@ import numpy as np
 import numpy.random as rn
 import matplotlib.pyplot as plt
 import metrics
+import scipy
+import optHMean
 
 logit = lambda z: 1.0/(1.0 + np.exp(-z))
 
@@ -48,53 +50,37 @@ def binaryMetrics(eta,mu,f):
     FN = np.dot(eta*(1-f)/2.,mu)
     return (TP,FP,FN)
 
-def binaryMetrics_emp(ypred,ytrue):
-    N=ytrue.shape[0]
-    TP=np.sum((ypred==1)*(ytrue==1))/float(N)
-    FP=np.sum((ypred==1)*(ytrue==0))/float(N)
-    FN=np.sum((ypred==0)*(ytrue==1))/float(N)
-    return (TP,FP,FN)
-
-def oracleClassifier(fopt,lossfunc,eta,mu):
-    dom = eta.shape[0]
-    fopt = binary2nparray(fopt)
-    (TP,FP,FN) = binaryMetrics(eta,mu,fopt)
-
-    (loss,g1,g2,g3)=lossfunc(TP,FP,FN)
-    coef = g1-g2-g3
-    thres = -g2/coef
-    print "Our classifier= "+str(coef)+"*sgn(eta(x)-"+str(thres)+")"
-    f=''
-    for i in range(dom):
-        f += str(int(coef*(eta[i]-thres)>=0))
-    f_arr = binary2nparray(f)
-    (TP,FP,FN) = binaryMetrics(eta,mu,f_arr)
-    #print "Binary Metrics"
-    #print (TP,FP,FN)
-    score=lossfunc(TP,FP,FN)[0]
-    return f,score,coef,thres
-
 def bestfF(eta, mu, lossfunc, method):
-    if method == 'F':
-        N = 100
-    elif method == 'T':
-        N = 1
     fFC = np.zeros(3)
     fFS = -1
-    for i in range(N+1):
-        for j in range(N+1):
-            for k in range(N+1):
-                f = np.array([i,j,k])*1./N
-                f = 2*f -1
-                (TP,FP,FN) = binaryMetrics(eta,mu,f)
-                (loss,g1,g2,g3) = lossfunc(TP,FP,FN)
-                grad = ((g1-g2-g3)*eta+g2)*mu/2
-                c1 = (g1-g2-g3)/2
-                c2 = -g2/(g1-g2-g3)
-                if loss > fFS:
-                    fFC = f
-                    fFS = loss
-                    c = (c1,c2,grad)
+    if method == 'F':
+        #res = scipy.optimize.minimize(optHMean.HMean3D,(0,0,0), args=(eta[0],eta[1],eta[2],mu[0],mu[1],mu[2]),bounds=((-1,1),(-1,1),(-1,1)))
+        res = scipy.optimize.minimize(optHMean.HMean3D,(0,0,0), args=(eta,mu),bounds=((-1,1),(-1,1),(-1,1)))
+        fFC = res.x
+        (TP,FP,FN) = binaryMetrics(eta,mu,fFC)
+        (fFS,g1,g2,g3) = lossfunc(TP,FP,FN)
+        grad = ((g1-g2-g3)*eta+g2)*mu/2
+        c1 = (g1-g2-g3)/2
+        c2 = -g2/(g1-g2-g3)
+        c = (c1, c2, grad)
+
+    elif method == 'T':
+        N = 1
+
+        for i in range(N+1):
+            for j in range(N+1):
+                for k in range(N+1):
+                    f = np.array([i,j,k])*1./N
+                    f = 2*f -1
+                    (TP,FP,FN) = binaryMetrics(eta,mu,f)
+                    (loss,g1,g2,g3) = lossfunc(TP,FP,FN)
+                    grad = ((g1-g2-g3)*eta+g2)*mu/2
+                    c1 = (g1-g2-g3)/2
+                    c2 = -g2/(g1-g2-g3)
+                    if loss > fFS:
+                        fFC = f
+                        fFS = loss
+                        c = (c1,c2,grad)
     return (fFC, fFS, c)
 
 

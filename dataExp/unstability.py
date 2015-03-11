@@ -29,7 +29,7 @@ def Hmean_partial_der(f):
 if __name__=='__main__':
     eta0 = np.array([0.49,0.5,0.51])
     mu0 = np.array([0.25,0.5,0.25])
-
+    '''
     # Perturbing eta
     for iter in range(10):
         eta = eta0 + np.array([rn.uniform(-.1,.1), rn.uniform(-.1,.1), rn.uniform(-.1,.1)])
@@ -40,10 +40,10 @@ if __name__=='__main__':
         (fTC, fTS, cT) = gnrlBayesCl.bestfF(eta, mu, metrics.HMean, 'T')
         print fTC, fTS, cT
         print '\n'
-
+    '''
     # Perturbing mu
     for iter in range(10):
-        mu = mu0 + np.array([rn.uniform(-.1,.1), rn.uniform(-.1,.1), rn.uniform(-.01,.1)])
+        mu = mu0 + np.array([rn.uniform(-.1,.1), rn.uniform(-.1,.1), rn.uniform(-.1,.1)])
         mu = mu/sum(mu)
         eta = eta0
         print eta, mu
@@ -52,7 +52,7 @@ if __name__=='__main__':
         (fTC, fTS, cT) = gnrlBayesCl.bestfF(eta, mu, metrics.HMean, 'T')
         print fTC, fTS, cT
         print '\n'
-
+    '''
     # Perturbing both
     for iter in range(10):
         mu = mu0 + np.array([rn.uniform(-.1,.1), rn.uniform(-.1,.1), rn.uniform(-.01,.1)])
@@ -64,3 +64,4 @@ if __name__=='__main__':
         (fTC, fTS, cT) = gnrlBayesCl.bestfF(eta, mu, metrics.HMean, 'T')
         print fTC, fTS, cT
         print '\n'
+    '''

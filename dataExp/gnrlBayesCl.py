@@ -166,13 +166,6 @@ if __name__=='__main__':
     dom = 10
     k = 2
     (eta,mu)=genData(dom,k)
-    '''
-    # The counter example is here!
-    dom = 3
-    k = 2
-    eta = np.array([0.49,0.5,0.51])
-    mu = np.array([0.25,0.5,0.25])
-    '''
     lossfunc = metrics.HMean
     print "Testing "+str(lossfunc.__name__)
     (bestC,bestS)=best_classifier(eta,mu,k,dom,lossfunc)

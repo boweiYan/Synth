@@ -50,38 +50,34 @@ def binaryMetrics(eta,mu,f):
     FN = np.dot(eta*(1-f)/2.,mu)
     return (TP,FP,FN)
 
-def bestfF(eta, mu, lossfunc, method):
-    fFC = np.zeros(3)
-    fFS = -1
+def bestfF(eta, mu, lossfunc, method, dim):
+    fFC = np.zeros(dim)
+    fFS = float("inf")
+    start = np.zeros(dim)
+    bnd = ()
+    for i in range(dim):
+        bnd = bnd + ((-1,1),)
     if method == 'F':
-        #res = scipy.optimize.minimize(optHMean.HMean3D,(0,0,0), args=(eta[0],eta[1],eta[2],mu[0],mu[1],mu[2]),bounds=((-1,1),(-1,1),(-1,1)))
-        res = scipy.optimize.minimize(optHMean.HMean3D,(0,0,0), args=(eta,mu),bounds=((-1,1),(-1,1),(-1,1)))
+        res = scipy.optimize.minimize(metrics.HMean, list(start), args=(eta, mu), bounds=bnd)
         fFC = res.x
-        (TP,FP,FN) = binaryMetrics(eta,mu,fFC)
-        (fFS,g1,g2,g3) = lossfunc(TP,FP,FN)
-        grad = ((g1-g2-g3)*eta+g2)*mu/2
-        c1 = (g1-g2-g3)/2
-        c2 = -g2/(g1-g2-g3)
-        c = (c1, c2, grad)
+        fFS = lossfunc(fFC,eta,mu)
+        print "optimal classifier: "+str(fFC)+" score: "+str(fFS)
 
     elif method == 'T':
-        N = 1
-
-        for i in range(N+1):
-            for j in range(N+1):
-                for k in range(N+1):
-                    f = np.array([i,j,k])*1./N
-                    f = 2*f -1
-                    (TP,FP,FN) = binaryMetrics(eta,mu,f)
-                    (loss,g1,g2,g3) = lossfunc(TP,FP,FN)
-                    grad = ((g1-g2-g3)*eta+g2)*mu/2
-                    c1 = (g1-g2-g3)/2
-                    c2 = -g2/(g1-g2-g3)
-                    if loss > fFS:
-                        fFC = f
-                        fFS = loss
-                        c = (c1,c2,grad)
-    return (fFC, fFS, c)
+        # Traverse over 2^10 vertices
+        for i in range(pow(2,dim)):
+            binstr = bin(i)
+            binlen = len(binstr)-2
+            f = np.zeros(dim)
+            for j in range(binlen):
+                f[-j-1] = int(binstr[j+2])
+            f = 2*f - 1
+            loss = lossfunc(f,eta,mu)
+            if (not np.isnan(loss)) and loss < fFS:
+                fFC = f
+                fFS = loss
+        print "Best deterministic classifier: "+str(fFC)+" score: "+str(fFS)
+    return (fFC, fFS)
 
 
 ##########################################
@@ -131,15 +127,15 @@ def subplotter(cbest_str, eta, coef, delta):
     f = plt.figure()
     ax = f.add_subplot(111)
     ax.step(index, eta[order], 'k-',  linewidth=3.0, markersize=8.0)
-    ax.plot([index[0], index[-1]], [delta, delta], marker='o', linewidth=3.0, markersize=8.0)
+    ax.plot([index[0], index[-1]], [delta, delta], marker='o', linewidth=2.0, markersize=8.0)
     if coef>0:
         ax.step(index, cbest[order], marker='s', linewidth=3.0, markersize=8.0) #, where='mid'
     elif coef<0:
         ax.step(index, -cbest[order], marker='s', linewidth=3.0, markersize=8.0)
 
-    ax.legend(['$\eta(x)$', r"$\delta^*=%.2f$"%(delta,), r"$\theta^*$"], loc='upper left', fontsize=35)
+    ax.legend(['$\eta(x)$', r"$\delta^*=%.2f$"%(delta,), r"$\theta^*$"], loc='upper left', fontsize=15)
     ax.set_xlabel('x', fontsize=30, weight='bold')
-    ax.set_ylim([-.1,1.1])
+    ax.set_ylim([-1.1,1.1])
 
     left, width = .25, .745
     bottom, height = .015, .5
@@ -161,23 +157,15 @@ if __name__=='__main__':
     ##########################
     # Set the parameters HERE!
     ##########################
-    plotme=True
+    # plotme=True
 
     dom = 10
     k = 2
     (eta,mu)=genData(dom,k)
     lossfunc = metrics.HMean
     print "Testing "+str(lossfunc.__name__)
-    (bestC,bestS)=best_classifier(eta,mu,k,dom,lossfunc)
-    print "optimal classifier: "+bestC+" score: "+str(bestS)
-
-    (f, score, coef, thres)=oracleClassifier(bestC,lossfunc,eta,mu)
-    print "our classifier: "+f+" score: "+str(score)
-    if score==bestS:
-        print "Success!"
-    else:
-        "Not Optimal!"
-    if np.isnan(score):
-        print "Not applicable"
-    else:
-        subplotter(bestC, eta, coef, thres)
+    (bestC1,bestS1)=bestfF(eta,mu,metrics.HMean,'F',dom)
+    coef = metrics.HMean_coef(bestC1,eta,mu)
+    print eta-coef[1]
+    (bestC2,bestS2)=bestfF(eta,mu,metrics.HMean,'T',dom)
+    subplotter(bestC1, eta, coef[0], coef[1])

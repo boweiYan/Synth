@@ -5,10 +5,9 @@ Check bayes optimal classifier for general metrics
 max_f L(f)
 L(f) = g(TP, FP, FN)
 
-@author: Bowei
+@author: Bowei Yan
 '''
-import math
-import random
+
 import numpy as np
 import numpy.random as rn
 import matplotlib.pyplot as plt
@@ -58,21 +57,22 @@ def bestfF(eta, mu, lossfunc, method, dim):
     for i in range(dim):
         bnd = bnd + ((-1,1),)
     if method == 'F':
-        res = scipy.optimize.minimize(metrics.HMean, list(start), args=(eta, mu), bounds=bnd)
+        res = scipy.optimize.minimize(lossfunc, list(start), args=(eta, mu), bounds=bnd)
         fFC = res.x
-        fFS = lossfunc(fFC,eta,mu)
+        fFS = lossfunc(fFC, eta, mu)
         print "optimal classifier: "+str(fFC)+" score: "+str(fFS)
 
     elif method == 'T':
         # Traverse over 2^10 vertices
-        for i in range(pow(2,dim)):
+        for i in range(1,pow(2,dim)):
             binstr = bin(i)
             binlen = len(binstr)-2
-            f = np.zeros(dim)
+            f = -1*np.ones(dim)
             for j in range(binlen):
-                f[-j-1] = int(binstr[j+2])
-            f = 2*f - 1
-            loss = lossfunc(f,eta,mu)
+                if int(binstr[-j-1])==1:
+                    f[-j-1] = 1
+            loss = lossfunc(f, eta, mu)
+
             if (not np.isnan(loss)) and loss < fFS:
                 fFC = f
                 fFS = loss
@@ -161,11 +161,13 @@ if __name__=='__main__':
 
     dom = 10
     k = 2
-    (eta,mu)=genData(dom,k)
+    (eta, mu) = genData(dom, k)
     lossfunc = metrics.HMean
     print "Testing "+str(lossfunc.__name__)
-    (bestC1,bestS1)=bestfF(eta,mu,metrics.HMean,'F',dom)
-    coef = metrics.HMean_coef(bestC1,eta,mu)
-    print eta-coef[1]
-    (bestC2,bestS2)=bestfF(eta,mu,metrics.HMean,'T',dom)
-    subplotter(bestC1, eta, coef[0], coef[1])
+    (bestC1, bestS1) = bestfF(eta, mu, lossfunc, 'F', dom)
+    (bestC2, bestS2) = bestfF(eta, mu, lossfunc, 'T', dom)
+    print np.sum((1+bestC1)*eta*mu/2)
+    print np.sum((1-bestC1)*(1-eta)*mu/2)
+    print np.sum((1+bestC2)*eta*mu/2)
+    print np.sum((1-bestC2)*(1-eta)*mu/2)
+    #subplotter(bestC1, eta, coef[0], coef[1])

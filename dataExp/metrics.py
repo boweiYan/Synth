@@ -78,6 +78,15 @@ def HMean_coef(f, eta, mu):
     c2 = g2/(g1+g2)
     return c1,c2
 
+def test1(f, eta, mu):
+    TP = np.sum((1+f)*eta*mu/2)
+    FN = np.sum((1-f)*eta*mu/2)
+    TN = np.sum((1-f)*(1-eta)*mu/2)
+    FP = np.sum((1+f)*(1-eta)*mu/2)
+
+    loss = pow(TP-TN,2)
+    return loss
+
 def QMean(x,y,z):
     loss = 1-0.5*(pow(z/(x+z),2)+pow(y/(1-x-z),2))
     g1 = y*y/pow(x+z-1,3)+z*z/pow(x+z,3)
